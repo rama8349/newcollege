@@ -1,0 +1,21 @@
+<!--<html>-->
+<!--<p>Dear <%=@obj[:first_name]%></p>-->
+<!--<p>-->
+<!--  Congratulations! Your account with Superseva has been successfully activated.-->
+<!--</p>-->
+<!--<p>-->
+<!--  You can find about the services and support that we offer by logging into <a href="http://www.superseva.com" >www.superseva.com</a> with the emailid and password registered with us.-->
+<!--  |+<a href="http://support.superseva.com/user/corporate_member_signup_second?user[emailid]=<%=@obj.emailid%>&user[scheme_id]=<%=@obj.scheme_id%>">Click here</a>+|-->
+<!--</p>-->
+
+<!--<p align="left"><b>Follow SuperSeva on</b>-->
+<!--  <a href="http://supersevaservices.wordpress.com"><img style="margin: 0pt 10px; float: none;border:0" alt="WordPress" src="http://support.superseva.com/images/wordpress.png"></a>&nbsp;&nbsp;-->
+<!--  <a href="http://www.facebook.com/SuperSeva"><img alt="FaceBook" style="margin: 0pt 10px; float: none;border:0" src="http://support.superseva.com/images/facebook.png"></a>&nbsp;&nbsp;-->
+<!--  <a href="http://twitter.com/SupersevaServ"><img alt="Twitter" style="margin: 0pt 10px; float: none;border:0" src="http://support.superseva.com/images/twitter.png"></a>&nbsp;&nbsp;-->
+<!--  <a href="http://www.linkedin.com/company/494136?trk=tyah"><img alt="Linkedin" style="margin: 0pt 10px;border:0" src="http://support.superseva.com/images/in.png"></a>-->
+<!--</p>-->
+<!--</html>-->
+
+<html>
+<p>Please fill in the additional Details for Registration <a href="http://support.superseva.com/user/corporate_member_signup_second?user[emailid]=<%=@obj.emailid%>&user[scheme_id]=<%=@obj.scheme_id%>">Click here</a></p>
+</html>

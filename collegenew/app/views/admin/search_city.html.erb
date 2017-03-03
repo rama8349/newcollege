@@ -1,0 +1,31 @@
+
+
+<%=stylesheet_link_tag 'showpage'%>
+<h2>Search City</h2>
+<% form_tag :action =>'city_search' do %>
+<table cellpadding="0" cellspacing="0" class="requestform">
+<tr>
+</tr>
+<tr>
+<td>City Name</td>
+<td><%= text_field 'city','city_name', :class=>'ltext'%></td>
+</tr>
+<tr>
+<td>Status Name</td>
+<td class="stext">
+<select name="city[status]">
+<option value="Active">Active</option>
+<option value="In-Active">In-Active</option>
+</select>
+</td>
+</tr>
+<tr>
+<td style="padding-left:100px;" colspan="2" >
+  <%= submit_tag 'Search' %>&nbsp;&nbsp;<%= link_to 'New City', :action=>'indexcity' %>
+</td>
+</tr>
+
+</table>  
+
+<%end%>
+

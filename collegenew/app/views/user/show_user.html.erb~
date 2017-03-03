@@ -1,0 +1,50 @@
+<b>Login From</b>:<b><%=@user.type_of_login%></b><br\>
+Login As <b><%=@user.first_name%></b>
+<td>
+                  <%Dir["#{::Rails.root}/public/user/photos/*"].each do |x|%>
+ <%if (File.basename(x).split('.')[0].to_s==(@user.first_name))%>
+                  <%end%>
+                  <%end%>
+                </td>
+<img src="/home/ram/eclipse_workspace/collegenew/public/user/photos/ramakrishna.jpg" alt="Mountain View" style="width:304px;height:228px;">
+<%= stylesheet_link_tag 'showpage' %>
+<h2>Welcome to college</h2>
+<%= form_tag({:action => 'uploadFile',:id=>@user.id},:multipart => true) %>
+<table class="total">
+   <!--  <tr>
+       <p align="center"><b><%#= link_to 'Search college',:action=>'search_college' %></b></p>
+    </tr> -->
+    <tr>
+<td><%= %></td>
+</tr>
+    <tr class="letters">
+    
+        <td>user Name</td>
+    <!--    <td>State Name</td>  -->
+
+        <td>Sur Name</td>
+        <td>emailid</td>
+       <td>Gender</td>
+       <td>upload Your documents</td>
+       
+        <!--<td>Delete</td>-->
+    </tr>
+  
+<tr >
+            <td><%= @user.first_name %></td>
+            <!--<td><%#= user.state.state_name %></td>-->
+            <td><%= @user.sur_name %></td>
+              <td><%= @user.email %></td>
+                <td><%= @user.gender %></td>
+           
+<td><%= file_field 'upload', 'contractcopy'%></td>
+
+<td><p ><%=submit_tag 'add'%></p></td>
+        </tr>
+         <tr>
+   	
+   </tr>    
+
+</table>
+   	 
+  

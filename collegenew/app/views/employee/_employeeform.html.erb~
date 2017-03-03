@@ -1,0 +1,84 @@
+
+<style>
+td{
+padding: 15px
+}
+</style>
+
+
+<%=stylesheet_link_tag 'showpage'%>
+  
+ <table class="submitforms">	
+	<tr>
+	 <td>First Name<font color="red">*</font></td>
+       <td><%= text_field 'employee', 'first_name', :class=>'ltext',:onkeypress=>"return letter(event)"%></td>
+	 <td>Middle Name</td>
+	 <td><%= text_field 'employee', 'middle_name', :class=>'ltext',:onkeypress=>"return letter(event)"%></td>
+	</tr>
+	
+	<tr>
+	 <td>Last Name</td>
+	 <td><%= text_field 'employee', 'last_name', :class=>'ltext',:onkeypress=>"return letter(event)"%></td>
+	 <td>Nick Name</td>
+	 <td><%= text_field 'employee', 'nick_name', :class=>'ltext',:onkeypress=>"return letter(event)"%></td>
+	</tr>
+	
+	<tr>
+	 <td>Login Name<font color="red">*</font></td>
+	 <td><%= text_field 'employee', 'login_name', :class=>'ltext'%></td>
+	 <td>Password<font color="red">*</font></td> 
+	 <td><%= password_field 'employee', 'password', :class=>'ltext'%></td>
+	</tr>
+	
+	<tr>
+	 <td>Confirm Password<font color="red">*</font></td>
+	 <td><%= password_field 'employee', 'password_confirmation', :class=>'ltext'%></td>
+	 <td>Address1<font color="red">*</font></td>
+	 <td><%= text_area 'employee', 'address1',{:rows => 2, :cols => 16}   %></td>
+	</tr>
+	
+	<tr>
+	 <td>Address2</td>
+	 <td><%= text_area 'employee', 'address2',{:rows => 2, :cols => 16}   %></td>
+	 <td>Address3</td>
+	 <td><%= text_area 'employee', 'address3',{:rows => 2, :cols => 16}   %></td>
+	</tr>
+
+	<tr>
+	 <td>Gender<font color="red">*</font></td>
+
+  <td><%=radio_button :employee, :gender, "M"%><label style="position:relative; top:-3px">Male </label> &nbsp;
+   &nbsp;
+   &nbsp;
+  <%=radio_button :employee, :gender, "F"%><label style="position:relative; top:-3px">Female</label></td>
+	 
+	 <td>D.O.B</td>
+	 <td><%= text_field "employee","date_of_birth", :class=>'ltext'%></td>
+	 <td><input type="reset" value=" ... " onclick="return showCalendar('employee_date_of_birth', '%d-%m-%Y', true);" style="width:1em;height:1.6em;"/></td>
+	</tr>
+
+	<tr>
+	 <td>Mobile</td>
+	 <td><%= text_field 'employee', 'contact_number', :class=>'ltext',:onkeypress => 'return mobile_number_with_limit(this.value,event, 10);' , :autocomplete =>"off"%></td>
+ <td>Email Id<font color="red">*</font></td>
+	 <td><%= text_field 'employee', 'email_id', :class=>'ltext'%></td>
+	</tr>
+	
+	</tr>
+	
+	<tr>
+	 <td>Marriage</td>
+	 <td class="stext"><%= select 'employee', 'marital_status', Employee::MARITAL_STATUS, :prompt=>"Select"  %></td>
+	 <td>Hobbies</td>
+	 <td><%= text_field 'employee', 'hobbies', :class=>'ltext',:onkeypress=>"return letter(event)"%></td>
+	</tr>
+<tr>
+<td>Role</td>
+	 <td class="stext"><%=collection_select 'employee','role_id',@roles,'id','role_name',{:prompt=>'Select Role'}%>
+	 <td>City<font color="red">*</font></td>
+	 <td class="stext"><%=collection_select 'employee','city_id',@cities,'id','city_name',{:prompt=>'Select City'}%></td>
+</tr>
+</table>	
+	
+
+

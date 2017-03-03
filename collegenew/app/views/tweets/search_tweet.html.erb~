@@ -1,0 +1,56 @@
+
+<style>
+table, td, th {
+    border: 1px solid blue;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th td {
+    height: 50px; color yellow;
+}
+
+</style>
+<table >
+  <thead>
+    <tr>
+     <th>Followers Name</th>
+      <th>Twitter Account Name</th>
+      <th>Tweet Text</th>
+      <th>Posted</th>
+
+<%= form_tag(tweets_path, :method => "get", id: "search-form") do %>
+<%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
+<%= submit_tag "Search" %>
+<% end %> 
+
+
+
+  </tr>
+  </thead> 
+
+  <tbody>
+ <%if !@tweets.blank?%>
+      <% @tweets.each do |tweet| %>
+        <tr>
+<td><%= (tweet[:entities][:user_mentions].last[:screen_name] rescue "NA.")%> </td>
+          <td>
+            <%= (tweet[:entities][:user_mentions].first[:name] rescue "NA.") %>
+          </td>
+          <td><%= tweet[:text] %></td>
+<td><b>Posted <%= time_ago_in_words(tweet[:created_at]) %> ago</b></td>
+        </tr>
+      <% end %>
+<%= paginate @tweets %>
+    <% else %>
+      <tr>
+        <td colspan="2">No Tweets Found</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+ 
+

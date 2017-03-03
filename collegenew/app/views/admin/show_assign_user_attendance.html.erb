@@ -1,0 +1,33 @@
+<%=stylesheet_link_tag 'show_page' %>
+
+<!DOCTYPE >
+<head>
+	<h1>Daily Students Attendance System </h1> 
+</head>
+<table>
+<tr>
+<td><%= link_to 'Add Attendance',:action=>'assign_user_attendance'%></td>
+</tr>
+<%count=0%>
+ <tr class="letters">
+	<td>date</td>
+	<td>attendance of the day</td>
+	<td>User Name</td>
+	<td>Emailid</td>
+	<td>Gender</td>
+	
+	
+</tr>
+
+ <%@attendance.each do |att|%>
+ 	<tr>
+ 		<td> <%=att.attend_date%></td>
+	<td> <%=att.attend_day%></td>
+	<td><%=att.user.first_name%></td>
+	<td><%=att.user.email%></td>
+	<td><%=att.user.gender%></td>
+
+</tr>
+	<%end%>
+
+</table>

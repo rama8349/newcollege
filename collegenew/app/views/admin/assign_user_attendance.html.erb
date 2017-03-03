@@ -1,0 +1,57 @@
+
+<%#raise params.inspect%>
+<%=stylesheet_link_tag 'show_page' %>
+<%= javascript_include_tag :defaults %>
+
+<!DOCTYPE >
+<head>
+	<h1>Daily Students Attendance System </h1> 
+</head>
+<%= error_messages_for :att%>
+<%=form_tag :action=>'assign_att'%>
+<table>
+	<tr>
+<td >
+
+</td>
+ <tr class="letters">
+ 	<!-- <td></td> -->
+ <td>S.No</td>
+	<td>User Name</td>
+	<td>Emailid</td>
+	<td>date</td>
+	<td>attendance of the day<td>
+</tr>
+<%count=0%>
+<%@user.each do |user|%>
+
+		<td><%=count+1%></td>
+	<td><%=user.first_name%></td>
+	<td><%=user.email%></td>
+	<td> <%=text_field 'att','attend_date',:class=>'ltext',:readonly => true, :value=>@fromdate ,:index=>user.id%>
+		<input type="reset" value=" ... " onclick="return showCalendar('user_attend_date', '%d-%m-%Y', true);" style="width:12px;"/></td>
+<%count= count+1%>	
+		<td id="form">
+			<%=radio_button 'att','attend_day' ,"full_day" ,:checked =>true,:index=>user.id %><span>Full Day</span>
+			<%=radio_button 'att','attend_day',"half_day",:index=>user.id %><span>Half Day</span>
+			<%=radio_button 'att','attend_day',"leave",:index=>user.id %><span>Leave</span>
+		</td>
+		<td><%=hidden_field 'att','user_id',:value=>user.id,:index=>user.id%></td>
+		<td><%=hidden_field 'att','created_by',:value=>@emp.id,:index=>user.id %></td>
+		
+</tr>
+<%end%>
+</table>
+<%=submit_tag 'Add',:id =>'daily'%>
+<br />
+<p style="color: red">You can give attendance only one time for a day</p>
+<script>
+<%if(@today_date==@attandance_date)%>
+document.getElementById("daily").disabled = true;
+
+	//jQuery("#daily").attr("disabled","disabled")
+	<%else%>
+document.getElementById("daily").disabled = false;
+	//jQuery("#daily").attr("enabled","enabled")
+	<%end%>
+</script>

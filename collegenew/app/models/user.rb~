@@ -1,0 +1,106 @@
+class User < ActiveRecord::Base
+
+# validates_presence_of(:first_name , :message => "^Please Enter the First Name")
+ # validates_uniqueness_of(:email, :message => "^ already exist", :scope => "email")
+  
+#  attr_accessor :upload  
+  has_many :attendances
+  
+  DAY= [
+    ["1","1"],
+    ['2','2'],
+    ['3','3'],
+    ['4','4']
+      
+    ]
+  MONTH=[
+    ["jan","1"],
+      ["feb","2"],
+    ["mar","3"]
+    ]
+    YEAR=[
+      ["1990","1990"],
+      ["1991","1991"],
+      ["1992","1992"],
+      ["1993","1993"]
+        ]
+        
+        
+
+  def self.authenticate(email, password)
+    employee = self.find_by_email(email)
+  end
+  
+  
+  
+    def self.save(upload,user)
+      name = "#{user.id}"+"_"+upload['contractcopy'].original_filename
+       raise upload['contractcopy'].inspect
+      directory = 'public/data'
+    #  raise directory.inspect
+      # create the file path
+      path = File.join(directory,name)
+      # write the file
+      File.open(path, "wb") { |f| f.write(upload['contractcopy'].read)}
+    end
+
+def self.from_omniauth(auth)
+if auth.provider=='facebook'
+    where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.name = auth.info.name
+user.email = auth.info.email
+user.confirm_email=auth.info.email
+      user.first_name = auth.info.first_name
+       user.sur_name = auth.info.last_name
+       user.gender = auth.info.gender
+date= Date.strptime(auth.info.birthday, "%m/%d/%Y")
+user.day=date.strftime("%d")
+user.month=date.strftime("%m")
+user.year=date.strftime("%Y")
+user.type_of_login=auth.provider
+      user.oauth_token = auth.credentials.token
+      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.save!
+    end
+
+elsif auth.provider=='twitter'
+@test=self.where("email= ? and type_of_login !=?", auth['extra']['raw_info']['email'],auth.provider).first
+if @test.blank?
+where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
+      user.provider = auth.provider
+   user.uid = auth.uid
+      user.name = auth.info.nickname
+     user.first_name = auth.info.name
+    user.email = auth.info.email
+   user.confirm_email=auth.info.email
+    user.type_of_login=auth.provider
+    user.oauth_token = auth.credentials.token
+      user.save!
+
+end
+else
+test1=self.where("email= ? and type_of_login=?", auth['extra']['raw_info']['email'],'twitter').first
+#raise test1.sur_name.inspect
+
+test1.update_attributes(:sur_name=>@test.sur_name,:day=>@test.day,:month=>@test.month,:year=>@test.year,:gender=>@test.gender)
+return test1
+end
+
+end
+  end
+
+
+def tweet(tweet)
+    client = Twitter::REST::Client.new do |config|
+     config.consumer_key        = "rHZqrv2KGvKQ5WE2lhZLUdKQt"
+  config.consumer_secret     = "r6Cqg6OubkNjGqJxr6T4nScGI1TDy3KDQX9DI5VjzgQCDsRrNL"
+  config.access_token        = "809368971057037312-02fxsXL5r2DtwIXLTVnukmC7ZweDfiP"
+  config.access_token_secret = "dRehxjElihueX5egLPapA6CafPkI7UUD2eGcxUasgGVru"
+    end
+    client.update(tweet)
+  end
+
+
+end

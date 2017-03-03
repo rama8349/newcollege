@@ -1,0 +1,36 @@
+<%=stylesheet_link_tag 'showpage'%>
+<h2>Listing Countries</h2>
+<table class="total">
+<tr>
+<td><%= link_to 'Create New',:action=>'indexcountry'%></td>
+</tr>
+<%count=0%>
+<tr class="letters">
+<td>Country Name</td>
+<td>Short Name</td>
+<td>Show</td>
+<td>Edit</td>
+<!--<td>Delete</td>-->
+</tr>
+<% for country in @country %>
+
+<%count=count+1%>
+<%if count%2 == 0%>
+<%row_css ='even'%>
+<%else%>
+<%row_css ='odd'%>
+<%end%>
+<tr class=<%=row_css%>>
+<td><%= country.country_name %></td>
+<td><%= country.country_short_form %></td>
+
+
+<td><%= link_to 'Show',:action=>'detailscountry' , :id=>country.id %> </td>
+<td><%= link_to 'Edit',:action=>'editcountry' , :id=>country.id %></td>
+<!--<td><%#= link_to 'Delete',{:action=>'destroycountry' , :id=>country.id},:confirm => 'Are you sure?'%></td>-->
+
+</tr>
+
+<%end%>
+
+</table>

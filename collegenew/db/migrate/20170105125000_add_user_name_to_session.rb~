@@ -1,0 +1,7 @@
+class AddUserNameToSession < ActiveRecord::Migration
+  def change
+add_column :sessions, :login_id, :int
+add_column :sessions, :login_name, :string
+add_column :sessions, :role, :string
+  end
+end

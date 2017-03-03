@@ -1,0 +1,42 @@
+<%=stylesheet_link_tag 'showpage'%>
+<%= error_messages_for :city %>
+<h2>Editing City</h2>
+
+<%=form_tag :action=>'updatecity',:id=>@city%>
+<table class="submitforms">
+<tr>
+<td>City Name<font color="red">*</font></td>
+
+<td><%= text_field 'city','city_name', :class=>'ltext'%></td>
+</tr>
+
+
+<tr>
+<td>Select State <font color="red">*</font></td>
+<td class="stext">
+<%=collection_select(:city, :state_id, State.all, :id, :state_name, {:prompt => true})%>
+</td>
+</tr>
+<tr>
+<td>Short Name <font color="red">*</font></td>
+<td><%= text_field 'city','city_short_form', :class=>'ltext'%></td>
+</tr>
+<tr>
+<td>Regional</td>
+<%@region = Regional.all%>
+<td class="stext"><%=collection_select 'city','regional_id',@region,'id','region_name',{:prompt => 'Select Regional'}%></td>
+</tr>
+<tr>
+ <td>Status</td>  
+  <td><%=radio_button :city, :status, "Active"%><label style="position:relative; top:-3px">:Active </label> &nbsp;
+   &nbsp;
+   &nbsp;
+  <%=radio_button :city, :status, "In-Active"%><label style="position:relative; top:-3px">:In-Active</label></td>
+</tr>
+
+</table>
+<p style="padding-left:95px;"><%=submit_tag 'Submit'%><span style=margin-left:40px;"><%= link_to 'Back',:action=>'showcity'%></span></p>
+
+
+
+</form>

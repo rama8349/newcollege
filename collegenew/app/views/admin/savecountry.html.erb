@@ -1,0 +1,31 @@
+<%=stylesheet_link_tag 'showpage'%>
+
+<%= error_messages_for :country %>
+
+<h2>Country</h2>
+
+<%if flash[:notice]%>
+<%=flash[:notice]%>
+<%end%>
+
+
+
+<%=form_tag :action=>'savecountry'%>
+<table class="submitforms">
+<tr>
+<td>Country Name<font color="red">*</font></td>
+<td> <%=text_field 'country','country_name', :class=>'ltext'%> </td>
+</tr>
+
+<tr>
+<td>Country Short Name<font color="red">*</font></td>
+<td><%=text_field 'country','country_short_form', :class=>'ltext'%></td>
+</tr>
+</table>
+
+<p style="padding-left:120px;"><%=submit_tag 'Submit'%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<%= link_to 'Back',:action=>'showcountry'%> </p>
+
+
+
+</form>
+

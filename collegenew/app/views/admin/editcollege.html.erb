@@ -1,0 +1,55 @@
+<%=stylesheet_link_tag 'showpage'%>
+
+<%= error_messages_for :college %>
+<h2>Editing College</h2>
+
+<%=form_tag :action=>'updatecollege',:id=>@college%>
+<table class="submitforms">
+<tr>
+<td>College Name<font color="red">*</font></td>
+<td> <%=text_field 'college','college_name', :class=>'ltext'%> </td>
+</tr>
+
+<tr>
+<td>College Short Name<font color="red">*</font></td>
+<td><%=text_field 'college','college_short_name', :class=>'ltext'%></td>
+</tr>
+<tr>
+<td>College Establish Date<font color="red">*</font></td>
+<%if @college.blank?%>
+<td> <%=text_field 'college','establish_date',:class=>'ltext',:readonly => true, :value=>@fromdate%> <td><input type="reset" value=" ... " onclick="return showCalendar('college_establish_date', '%d-%m-%Y', true);" style="width:12px;"/></td>
+</tr>
+<%else%>
+<td> <%=text_field 'college','establish_date',:class=>'ltext', :value=>@college.establish_date%> <td><input type="reset" value=" ... " onclick="return showCalendar('college_establish_date', '%d-%m-%Y', true);" style="width:12px;"/></td>
+<%end%>
+<tr>
+<td>College Address<font color="red">*</font></td>
+<td> <%=text_area 'college','address',{:rows=>2,:cols=>17}%> </td>
+</tr>
+ <tr>
+      <td>Status<font color="red">*</font></td>
+      <td class="stext"><%=select 'college','status',  ["Active", "In-Active"],:class=>'ltext'%></td>
+  </tr>
+
+</table>
+<p style="padding-left:95px;"><%=submit_tag 'Submit'%><span style=margin-left:40px;"><%= link_to 'Back',:action=>'showcollege'%></span></p>
+</form>
+<script>
+function letter(mylink, windowname)
+{
+if (! window.focus)return true;
+    var href;
+    if (typeof(mylink) == 'string') href=mylink;
+    else href=mylink.href; 
+
+
+
+
+    window.open(href, windowname, 'width=400,height=200,scrollbars=yes'); 
+    return false; 
+
+
+
+}
+</script>
+

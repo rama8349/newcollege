@@ -1,0 +1,45 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<%= stylesheet_link_tag 'showpage' %>
+
+    <title>Super Seva:: ::</title>
+ </head>   
+    <body>
+      <div class="super_parent">
+    
+       <div class="parent">
+           
+                 <div class="loginContent">
+                  <form id="form" name="form" action="/login/authorize_role" method="post">
+                        <% if flash[:message] %>
+                            <%= flash[:message] %>
+                        <% end %>
+                       <table border="0">
+                       <tr>
+                       <td style="font-family:bold,sans-serif,arial;font-size:12.8px;">Login Name:</td>                       
+                       <td ><%=h @employee.login_name%></td>
+                       </tr>
+                       <tr><td></td><td></td></tr>
+                       <tr>
+                       <td style="font-family:bold,sans-serif,arial;font-size:12.8px;">Roles:</td>
+                       <%#@arr.each do |rol|%>
+                       <td ><%#= radio_button_tag("employee[role_id]",rol,true)%><%#=h Crmrole.find(rol).role_name%></td>
+                       <%#end%>
+                       </tr>
+                       <tr style="text-align:right;">
+                       <td colspan="2">
+                       <input type="submit" value="" class="backgroundImageSubmit"/>
+                       &nbsp;&nbsp;&nbsp;
+                       </td>
+                       </tr>
+                       </table>
+                       
+                     </form>
+                 </div>   
+       </div>
+      </div>
+    </body>
+</html>

@@ -1,0 +1,37 @@
+<%=stylesheet_link_tag 'showpage'%>
+<%= error_messages_for :state %>
+<h2>State</h2>
+<%if flash[:notice]%>
+<%=flash[:notice]%>
+<%end%>
+
+
+
+<%=form_tag :action=>'savestate'%>
+<table class="submitforms">
+<tr>
+<td>State Name<font color="red">*</font></td>
+<td><%=text_field 'state','state_name', :class=>'ltext'%></td>
+</tr>
+
+<tr>
+<td>Select Country<font color="red">*</font></td>
+<td class="stext">
+<%=collection_select(:state, :country_id, Country.all, :id, :country_name, {:prompt => true})%>
+</td>
+</tr>
+
+<tr>
+<td>State Short Name<font color="red">*</font></td>
+<td><%=text_field 'state','state_short_form', :class=>'ltext'%></td>
+</tr>
+</table>
+
+<p style="padding-left:120px;"><%=submit_tag 'Submit'%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<%= link_to 'Back',:action=>'showstate'%> </p>
+
+
+
+
+</form>
+

@@ -1,0 +1,57 @@
+<%=stylesheet_link_tag 'showpage'%>
+<h2>Listing Colleges</h2>
+<table class="total">
+<tr>
+<td><%= link_to 'Create New',:action=>'indexcollege'%></td>
+</tr>
+<%count=0%>
+<tr class="letters">
+<td>S.No</td>
+<td>college Name</td>
+<td>Short Name</td>
+<td>college Address</td>
+<td>Establish Date</td>
+<td>Status</td>
+<!--<td>Show</td>-->
+<td>Edit</td>
+<!--<td>Delete</td>-->
+</tr>
+ <%count=0%>
+    <% for college in @college %>
+         <%count=count+1%>
+<%if count%2 == 0%>
+<%row_css ='even'%>
+<%else%>
+<%row_css ='odd'%>
+<%end%>
+<tr class=<%=row_css%>>
+            <td><%=count%></td>
+            <td><%= college.college_name %></td>
+            <!--<td><%#= city.state.state_name %></td>-->
+            <td><%= college.college_short_name %></td>
+            <td><%= college.address %></td>
+            <td><%= college.establish_date%></td>
+            <td><%= college.status %></td>
+           <!--<td><%#= link_to 'Show',:action=>'detailscollege' , :id=>college.id %></td>-->
+            <td><%= link_to 'Edit',:action=>'editcollege', :id=>college.id %></td>
+            <!--<td><%#= link_to 'Delete',{:action=>'destroycity' , :id=>city.id},:confirm => 'Are you sure?' %></td>-->
+
+        </tr>
+    <% end %>
+
+</table>
+
+<script type="text/javascript">
+  function popup(mylink, windowname) { alert(55)
+    if (! window.focus)return true;
+    var href;
+    if (typeof(mylink) == 'string') href=mylink;
+    else href=mylink.href; 
+    window.open(href, windowname, 'width=400,height=200,scrollbars=yes'); 
+    return false; 
+  }
+function letter(test){
+alert(4)}
+</script>
+
+

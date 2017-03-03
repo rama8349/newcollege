@@ -1,0 +1,16 @@
+<%=stylesheet_link_tag 'style.css'%>
+<div id="leftcol">
+  <div class="box">
+    <ul class="menu">
+      <li><%=link_to 'My Profile', {:controller=>'user',:action=>'show_user'}%></li>	
+      <li><%=link_to 'java script functions', {:controller=>'user',:action=>'java_script'}%></li>
+  <li><%=link_to 'Send Tweet', {:controller=>'tweets',:action=>'new'}%></li>
+<li><%=link_to 'Search Tweet', {:controller=>'tweets',:action=>'search_tweet'}%></li>
+	
+      <!-- <li><%#=link_to 'State', {:controller=>'admin',:action=>'showstate'}%></li>
+      <li><%#=link_to 'Regional',{:controller=>'admin',:action=>'showregion'}%></li> 
+      <li><%#=link_to 'City', {:controller=>'admin',:action=>'showcity'}%></li>
+<li><%=link_to 'College', {:controller=>'admin',:action=>'showcollege'}%></li> -->
+
+  </div>
+</div>

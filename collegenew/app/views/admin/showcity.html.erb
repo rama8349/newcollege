@@ -1,0 +1,47 @@
+
+<%= stylesheet_link_tag 'showpage' %>
+<h2>Listing Cities</h2>
+<table class="total">
+    <tr>
+       <p align="center"><b><%= link_to 'Search Again', {:action=>'search_city'} %></b></p>
+    </tr>
+    <tr>
+<td><%= link_to 'Create New',:action=>'indexcity'%></td>
+</tr>
+    <tr class="letters">
+    <td>S.No</td>
+        <td>City Name</td>
+    <!--    <td>State Name</td>  -->
+
+        <td>Short Name</td>
+        <td>Regional Name</td>
+       <td>Status</td>
+       <td>State Name</td>
+        <td>Show</td>
+        <td>Edit</td>
+        <!--<td>Delete</td>-->
+    </tr>
+    <%count=0%>
+    <% for city in @city %>
+         <%count=count+1%>
+<%if count%2 == 0%>
+<%row_css ='even'%>
+<%else%>
+<%row_css ='odd'%>
+<%end%>
+<tr class=<%=row_css%>>
+            <td><%=count%></td>
+            <td><%= city.city_name %></td>
+            <!--<td><%#= city.state.state_name %></td>-->
+            <td><%= city.city_short_form %></td>
+            <td><%= city.regional.region_name if city.regional%></td>
+            <td><%= city.status %></td>
+            <td><%= city.state.state_name%></td>
+            <td><%= link_to 'Show',:action=>'detailscity' , :id=>city.id %></td>
+            <td><%= link_to 'Edit',:action=>'editcity', :id=>city.id %></td>
+            <!--<td><%#= link_to 'Delete',{:action=>'destroycity' , :id=>city.id},:confirm => 'Are you sure?' %></td>-->
+
+        </tr>
+    <% end %>
+
+</table>

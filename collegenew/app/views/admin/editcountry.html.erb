@@ -1,0 +1,18 @@
+<%=stylesheet_link_tag 'showpage'%>
+
+<%= error_messages_for :country %>
+<h2>Editing Country</h2>
+
+<%=form_tag :action=>'updatecountry',:id=>@country%>
+<table class="submitforms">
+<tr><td>Country Name</td>
+<td><%= text_field 'country','country_name', :class=>'ltext'%></td>
+</tr>
+<tr><td>Short Name</td>
+<td><%= text_field 'country','country_short_form', :class=>'ltext'%></td>
+</tr>
+</table>
+<p style="padding-left:90px;"><%=submit_tag 'Edit'%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<%= link_to 'Back',:action=>'showcountry'%></p> 
+
+
+</form>

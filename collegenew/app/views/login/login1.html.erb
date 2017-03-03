@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%#= stylesheet_link_tag 'showpage' %>
+    <div id="fb-root"></div>
+    <script>
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <style type="text/css">
+      .common_left_block {clear:both;float:left;overflow:hidden;width:100%;margin-bottom:3px;}
+      .section_title {color:white;font-weight:bold;border-bottom:1px solid #3B5998;float:left;margin:0;padding:0;width:100%;background:#3B5998;}
+      .innerbox {width:100%;padding-bottom:10px;float:left;margin:0;}
+    </style>
+    <title>SuperSeva:: ::</title>
+  </head>   
+  <body>
+    <div class="super_parent">
+      <div class="parent">
+        <div class="logo" style="float:left;clear:both"><img src="/images/logo.png" height="100" style="padding:10px;margin-top:20px;" alt="SupersevaSupport"></div>
+        <div class="loginContent">
+            <% if flash[:message] %>
+              <%= flash[:message] %>
+            <% end %>
+            <table border="0">
+<tr><td><font color="red"><%=link_to 'login As Employee' ,:controller=>'login',:action=>'login'%></font></td></tr>
+
+<tr><td><%=link_to 'login As User',:controller=>'user',:action=>'login'%></td></tr>
+
+            </table>
+        </div>
+       
+  </body>
+</html>

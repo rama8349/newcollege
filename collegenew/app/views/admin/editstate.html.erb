@@ -1,0 +1,27 @@
+<%=stylesheet_link_tag 'showpage'%>
+<%= error_messages_for :state %>
+<h2>Editing states</h2>
+
+<%=form_tag :action=>'updatestate',:id=>@state%>
+<table class="submitforms">
+<tr>
+<td>State Name</td>
+<td><%= text_field 'state','state_name', :class=>'ltext'%></td>
+</tr>
+
+<tr>
+<td>Select Country</td>
+<td class="stext">
+<%=collection_select(:state, :country_id, Country.all, :id, :country_name, {:prompt => true})%>
+</td>
+</tr>
+
+<tr>
+<td>Short Name</td>
+<td><%= text_field 'state','state_short_form', :class=>'ltext'%></td>
+</tr>
+</table>
+<p style="padding-left:90px;"><%=submit_tag 'Edit'%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<%= link_to 'Back',:action=>'showstate'%></p>
+
+</form>
+

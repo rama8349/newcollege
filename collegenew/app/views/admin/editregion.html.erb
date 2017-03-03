@@ -1,0 +1,15 @@
+<%=stylesheet_link_tag 'showpage'%>
+<%=error_messages_for :regional%>
+<h2>Edit Regional</h2>
+
+
+<%=form_tag :action => 'updateregion',:id => @regional.id%>
+<table class="submitforms">
+<tr>
+<td>Regional Name</td>
+<td><%=text_field 'regional','region_name', :class=>'ltext'%></td>
+</tr>
+</table>
+
+<p  style="padding-left:110px;"><%=submit_tag 'Submit'%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<%= link_to 'Back',:action=>'showregion'%> </p>

@@ -1,0 +1,18 @@
+<%=stylesheet_link_tag 'style.css'%>
+<div id="leftcol">
+  <div class="box">
+    <ul class="menu">
+    <%if session[:role] =="Administrator"%>
+      <li><%=link_to 'Country', {:controller=>'admin',:action=>'showcountry'}%></li>	
+      <li><%=link_to 'State', {:controller=>'admin',:action=>'showstate'}%></li>
+      <li><%=link_to 'Regional',{:controller=>'admin',:action=>'showregion'}%></li> 
+      <li><%=link_to 'City', {:controller=>'admin',:action=>'showcity'}%></li>
+<li><%=link_to 'College', {:controller=>'admin',:action=>'showcollege'}%></li>
+<li><%=link_to 'Attendance', {:controller=>'admin',:action=>'show_assign_user_attendance'}%></li>
+<h1>Reports</h1>
+<li><%=link_to 'Attendance Report', {:controller=>'admin',:action=>'show_attendance'}%></li>
+
+    <%end
+    %>
+  </div>
+</div>

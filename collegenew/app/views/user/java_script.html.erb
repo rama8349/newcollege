@@ -1,0 +1,121 @@
+1.<html>
+   <head>
+      
+      <script type="text/javascript">
+         <!--
+            function sayHello() {
+               alert("Hello World")
+            }
+         //-->
+      </script>
+      
+   </head>
+   
+   <body>
+      <p style="color:blue";>Click the following button and see result</p>
+      
+      <form>
+         <input type="button" onclick="sayHello()" value="Say Hello" />
+      </form>
+      
+   </body>
+</html>
+
+2.
+ <!-- doubleclick function -->
+<!DOCTYPE html>
+<html>
+<body>
+
+<p style="color:blue"; ondblclick="myFunction()">Double-click this paragraph to trigger a function.</p>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+    document.getElementById("demo").innerHTML = "Hello World";
+}
+</script>
+
+</body>
+</html>
+
+
+3.
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+.droptarget {
+    float: middle; 
+    width: 100px; 
+    height: 35px;
+    margin: 15px;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+}
+</style>
+</head>
+<body>
+
+<p style="color:blue";>Drag the p element back and forth between the two rectangles:</p>
+
+<div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)">
+  <p ondragstart="dragStart(event)" ondrag="dragging(event)" draggable="true" id="dragtarget">Drag me!</p>
+</div>
+
+<div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+<p style="clear:both;"><strong>Note:</strong> drag events are not supported in Internet Explorer 8 and earlier versions or Safari 5.1 and earlier versions.</p>
+
+<p id="demo"></p>
+
+<script>
+function dragStart(event) {
+    event.dataTransfer.setData("Text", event.target.id);
+}
+
+function dragging(event) {
+    document.getElementById("demo").innerHTML = "The p element is being dragged";
+}
+
+function allowDrop(event) {
+    event.preventDefault();
+}
+
+function drop(event) {
+    event.preventDefault();
+    var data = event.dataTransfer.getData("Text");
+    event.target.appendChild(document.getElementById(data));
+    document.getElementById("demo").innerHTML = "The p element was dropped";
+}
+</script>
+
+</body>
+</html>
+
+4.
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Write something in the text field to trigger a function.</p>
+
+<td id="myInput"><%=text_field '','',:oninput=>"myFunction()"%></td><input type="text" id="myInput" oninput="myFunction()">
+
+<p id="demo" align="down"></p>
+
+<script>
+function myFunction() {
+    var x = document.getElementById("myInput").value;
+alert(x)
+    document.getElementById("demo").innerHTML = "You wrote: " + x;
+}
+</script>
+
+</body>
+</html>
+
+    
+
+

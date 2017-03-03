@@ -1,0 +1,23 @@
+<%=stylesheet_link_tag 'showpage'%>
+<h2>Regional Lists</h2>
+<table class="total">
+<tr><td><%=link_to 'Create New Region',:action=>'newregional'%></td></tr>
+
+<tr class="letters">
+<td>Regional Name</td>
+<td>Edit</td>
+<!--<td>Delete</td>-->
+</tr>
+<% for region in @regions %>
+
+
+<tr class="<%= cycle('even','odd') %>">
+<td><%= region.region_name %></td>
+
+<td><%= link_to 'Edit',:action=>'editregion' , :id=>region.id %></td>
+<!--<td><%#= link_to 'Delete',{:action=>'destroycountry' , :id=>country.id},:confirm => 'Are you sure?'%></td>-->
+
+</tr>
+
+<%end%>
+</table>

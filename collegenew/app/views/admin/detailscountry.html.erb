@@ -1,0 +1,20 @@
+
+<table border="1">
+<tr>
+<td><b>Country Name</b></td>
+<td><b>Short Name</b></td>
+<td><b>Created At</b></td>
+<td><b>Updated At</b></td>
+</tr>
+
+
+<tr>
+<td><%=h @country.country_name %></td>
+<td><%=h @country.country_short_form %></td>
+<td><%=h @country.created_at%></td>
+<td><%=h @country.updated_at%></td>
+</tr>
+
+<%= link_to 'Back',:action=>'showcountry'%>
+
+</table>

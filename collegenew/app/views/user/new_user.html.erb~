@@ -1,0 +1,178 @@
+<style>
+	p1,p2,p3,p4,p5,p6,p7{
+    color: red;
+    font-size: 90%;
+}
+</style>
+<%=stylesheet_link_tag 'showpage'%>
+ <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<style>
+table,tr,td{
+ text-align:right;
+ padding-right:0px;
+}
+</style>
+
+<div class="signup">
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<%=form_tag(:action=>"createuser") %>
+<table  border="0" align="right">
+<tr>
+<td><%=text_field 'user','first_name',:placeholder=>'First name',:size=>"15",:style=>"height: 30px;"%></td>
+<td><%=text_field 'user','sur_name',:placeholder=>'Last name',:size=>"15",:style=>"height: 30px;"%></td>
+</tr>
+<tr>
+	<td><p1><div id="text1"><b></b></div></p1></td>	<td><p2><div id="text1"><b></b></div></p2></td>
+</tr>
+<tr>
+    <td colspan="2"><%=text_field 'user','email',:placeholder=>'Mobile number or Email address',:size=>"36",:style=>"height: 30px;"%></td>
+  </tr>
+  <tr>
+	<td><p3><div id="text1"><b></b></div></p3></td>	
+</tr>
+<tr>
+    <td colspan="2"><%=text_field 'user','confirm_email',:placeholder=>'Re enter Email address',:size=>"36",:style=>"height: 30px;"%></td>
+  </tr>
+<tr>
+	<tr>
+	<td><p4><div id="text1"><b></b></div></p4></td>	
+</tr>
+<td colspan="2"><%=text_field 'user','pasword',:placeholder=>'New password',:size=>"36",:style=>"height: 30px;"%></td>
+</tr>
+<tr>
+	<td><p7><div id="text1"><b></b></div></p7></td>	
+</tr>
+<tr>
+	<td align="center">Birthday</td>
+	</tr>
+	<tr>
+	
+<td class="daytext" colspan="2"><%=select 'user','day',User::DAY,:prompt=>"Day" ,:size=>"10",:style=>"height: 30px;"%> 
+	<%=select 'user','month',User::MONTH,:prompt=>"Month",:size=>"10",:style=>"height: 30px;"%>
+	<%=select 'user','year',User::YEAR,:prompt=>"Year",:size=>"10",:style=>"height: 30px;"	%></td>
+</tr>
+<tr>
+	<td><p5><div id="text1"><b></b></div></p5></td>	
+</tr>
+<tr>
+<td id="form"><%=radio_button 'user','gender',"M",:checked=>(params[:gender] == nil ? true : params[:gender])%><span>Male</span>
+<%=radio_button 'user','gender',"F",:placeholder=>'male'%><span>Fe-Male</span></td>
+</tr>
+<tr>
+	<td><p6><div id="text1"><b></b></div></p6></td>	
+</tr>
+<tr><td><p>
+<%= submit_tag "Create An account" ,:value=>"Add"%></p>
+</td></tr>
+</form>
+<tr>
+	<td><%=link_to 'Back',:contoller=>'user',:action=>'login'%></td>
+</tr>
+</table>
+
+
+</div>
+<script type="text/javascript" language="javascript">
+jQuery(document).ready(function(e){
+	
+	jQuery('#inc').submit(function(e){
+	var fn=jQuery('#user_first_name').val()
+	var sn=jQuery('#user_sur_name').val()
+	var email=jQuery('#user_email').val()
+	var re = /^(([^<>()[]\.,;:s@"]+(.[^<>()[]\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/igm;
+    var reg=/\S+@\S+\.\S+/;
+    var phoneno = /^\d{10}$/;
+	var con_email=jQuery('#user_confirm_email').val()
+	var pwd=jQuery('#user_pasword').val()
+	var day=jQuery('#user_day').val()
+	var month=jQuery('#user_month').val()
+	var year=jQuery('#user_year').val()
+	var radios = document.getElementsByName("user[gender]")
+   
+	 var formValid = false;
+	//var gender=jQuery('#user_gender[0]').val()
+	//alert(gender)
+	if (fn==""){
+		jQuery("p1").show();
+	jQuery("p1").text("Please select first name");
+	e.preventDefault();
+	}
+	else
+	{
+		jQuery("p1").hide();
+	}
+	
+	 if (sn==""){
+	 		jQuery("p2").show();
+	jQuery("p2").text("Please select sur name");
+    e.preventDefault();
+	}
+	else
+	{
+		jQuery("p2").hide();
+	}
+	 if (email==""){
+	 		jQuery("p3").show();
+		jQuery("p3").text("Please select email or mobile number");
+		}
+	else if(email !="" && reg.test(email)==false && isNaN(email)==true) {
+		
+alert("Please Enter valid email id ")	
+	}
+	else if(email !="" && phoneno.test(email)==false && isNaN(email)==false)
+	{
+		alert('please enater valid mobile number')
+	}	
+	else
+	{
+		jQuery("p3").hide();
+	}
+ if (con_email==""){
+ 	
+ 		jQuery("p4").show();
+		jQuery("p4").text("Please confirm email or mobile number");
+	e.preventDefault();
+	}
+	else if(email!=con_email)
+	{
+		jQuery("p4").text("Your email Address or Mobile or do not match Please try Again")
+	}
+	else
+	{
+		jQuery("p4").hide();
+	}
+	
+	 if (pwd=="")
+	{
+			jQuery("p7").show();
+		jQuery("p7").text("Please enter new password");
+e.preventDefault();
+	}
+	else
+	{
+		jQuery("p7").hide();
+	}
+	
+	 if (day==""|| month==""||year==""){
+	 		jQuery("p5").show();
+	 	jQuery("p5").text("Please select date of birth");
+	e.preventDefault();
+	}
+	else
+	{
+		jQuery("p5").hide();
+	}
+  	
+	
+	
+
+	
+	});
+});
+ 
+
+</script>

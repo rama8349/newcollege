@@ -1,0 +1,13 @@
+class Sendmail < ApplicationMailer
+def user_sign_up(user)
+@subject = 'User Registration Details'
+  @body = 'User Registration Details'
+  #@recipients = user.emailid
+  @recipients = user.email
+  @from = 'rama8349@gmail.com'
+  part :content_type => "text/html",
+  :body => render_message("user_confirm", :obj => user)
+raise user.inspect
+end
+
+end

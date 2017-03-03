@@ -1,0 +1,22 @@
+
+<table border="1">
+<tr>
+<td><b>State Name</b></td>
+<td><b>Country Name</b></td>
+<td><b>Short Name</b></td>
+<td><b>Created At</b></td>
+<td><b>Updated At</b></td>
+</tr>
+
+
+<tr>
+<td><%=h @state.state_name %></td>
+<td><%=h @state.country.country_name %></td>
+<td><%=h @state.state_short_form %></td>
+<td><%=h @state.created_at%></td>
+<td><%=h @state.updated_at%></td>
+</tr>
+
+<%= link_to 'Back',:action=>'showstate'%>
+
+</table>

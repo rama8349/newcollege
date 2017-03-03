@@ -1,0 +1,73 @@
+
+
+<%= stylesheet_link_tag 'showpage' %>
+
+<h2>Listing Employees</h2>
+
+<table class="total">
+
+
+    <tr>
+
+        <td><%= link_to 'New Employee', :action => 'newemployee' %></td>
+
+    </tr>
+
+    <tr class="letters">
+
+        
+        <td>Login Name</td>
+
+        <td>Gender</td>
+
+        <td>Contact Number</td>
+        
+        <td>Email Id</td>
+		
+
+        <td>City</td>
+
+
+        <td>Status</td>
+
+        <td>Edit</td>
+		
+		
+       
+
+    </tr>
+
+
+    <% for employee in @employees %>
+    <%if employee.role_id == 1 and session[:role] == 'Super User'%>
+    <%else%>
+<tr class="<%=cycle('even','odd')%>" height="20">
+
+            <td><%= h employee.login_name %></td>
+
+
+            <td><%= h employee.gender %></td>
+
+            <td><%= h employee.contact_number %></td>
+
+            <td><%= h employee.email_id %></td>
+
+            <td><%= h employee.city.city_name %></td>
+
+
+
+            <td><%= h employee.status %></td>
+
+            <td><%= link_to 'Edit', {:action=>'editemployee', :id=>employee} %></td>
+
+            
+
+        </tr>
+<%end%>
+    <% end %>
+
+</table>
+
+<%#= will_paginate @employees %>
+
+

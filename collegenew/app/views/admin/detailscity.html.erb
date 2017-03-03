@@ -1,0 +1,22 @@
+
+<table border="1">
+<tr>
+<td><b>City Name</b></td>
+<td><b>State Name</b></td>
+<td><b>Short Name</b></td>
+<td><b>Created At</b></td>
+<td><b>Updated At</b></td>
+</tr>
+
+
+<tr>
+<td><%=h @city.city_name %></td>
+<td><%=h @city.state.state_name %></td>
+<td><%=h @city.city_short_form %></td>
+<td><%=h @city.created_at%></td>
+<td><%=h @city.updated_at%></td>
+</tr>
+
+<%= link_to 'Back',:action=>'showcity'%>
+
+</table>

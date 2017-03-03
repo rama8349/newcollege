@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=100" >
+    <title>Welcome to College:<%= controller.action_name %></title>
+    <%= stylesheet_link_tag 'showpage' %>
+    <%=stylesheet_link_tag 'style'%>
+    <%#=stylesheet_link_tag 'prototip'%>
+    <%#= stylesheet_link_tag 'paginate' %> 
+    <%= javascript_include_tag :defaults %>
+    <%#= javascript_include_tag "cal" %>
+    <%#= javascript_include_tag "calendar" %>
+    <%#= javascript_include_tag "calendar-en" %>
+    <%#= stylesheet_link_tag "calendar" %>
+    <%#= javascript_include_tag "prototype" %>
+    <%#= javascript_include_tag "prototype1" %>
+    <%#= javascript_include_tag "prototip"%>
+    <%#= stylesheet_link_tag 'exchange' %>
+    <%#= javascript_include_tag "getelement" %>
+    <%= stylesheet_link_tag "print", :media => "print" %>
+    <%= render :partial => "/layouts/jquery_files" %>
+    <%#=stylesheet_link_tag "jquery.timeentry"%>
+    <%#=javascript_include_tag "jquery.timeentry.min"%>
+   <!-- <link rel="stylesheet" href="/stylesheets/jquery.simplyscroll.css" media="screen" type="text/css"> -->
+    <script type="text/javascript" src="/javascripts/jquery.simplyscroll.js"></script>
+    <script type="text/javascript">
+      (function(jQuery) {
+        jQuery(function() {
+          jQuery("#scroller_footer").simplyScroll();
+        });
+      })(jQuery);
+    </script>
+    <script language="Javascript">
+      function displayWindow(url, width, height)
+      {
+        var Win = window.open(url,"AddressWindow","width="+ width +",height="+height +",scrollbars=yes, resizable=false,screenX=10,screenY=10,top=10,left=10");
+        Win.focus();
+      }
+      function clear_session()
+      {
+        alert("You are closing the Application without logout");
+        var myAjax = new Ajax.Request('/login/logout',{method: 'get'});
+      }
+    </script>
+    <style type="text/css">
+      #foot {
+        position:fixed;
+        //left:130px;
+        bottom:0px;
+        height:60px;
+        width:100%;
+        //background:#999;
+        //margin-left:70px;
+        background:url(/images/foot.jpg) no-repeat; 
+        background-size:100% auto;
+      } 
+    </style>
+  </head>            
+  <body>
+  	<%#raise session[:login_id].inspect%>
+    <%#emp=Employee.find(session[:login_id])%>
+    <%pop_serv=[94,18,28,86,15,75,5,46,23,27,8,9]%>
+  	<%if (session[:city])%>
+      <% city=City.find(session[:city])%>
+      <%= hidden_field  'login', 'role', :value=>"Name:"+session[:login_name]+"  "+"Role:"+session[:role]+"  "+"City:"+city.city_name%>
+  	<%end%>
+    <div id="wrapper">
+     	<div id="bannertop">
+       	<div id="bannermiddle">
+         	<div id="banner">      
+           	<%= image_tag("supersevalogo.gif",:height=>"84",:width=>"750") %>
+           	<%= @page_title || "" %>      
+           	<div id="bannerletters">                  
+              <%if session[:role] == "Help Desk" %>
+                <table>
+                  <td style="padding-left:300px;">
+                    <% form_tag(:controller => 'customer', :action => 'service_search')  do %>
+                      <%= text_field_tag "service_name", params[:service_name] || ''  , :placeholder => "Enter service name ...", :class => 'search_box' %>
+                      <%= submit_tag("Search", :class => 'search_button_submit') %>
+                    <% end %>
+					 			  </td>
+					  			<td style="padding-left:5px;">
+				            <%=link_to 'Home', {:controller=>'admin', :action=>'index'}%>
+				           |                  
+				            <%=link_to 'Logout', {:controller=>'login',:action=>'logout'}%> 
+									</td>
+	        		  </table>
+		          <%elsif session[:role] == "Support User" %>
+      				  <table>
+		              <td style="padding-left:300px;">
+		                <% form_tag(:controller => 'customer', :action => 'service_search')  do -%>
+                      <%= text_field_tag "service_name", params[:service_name] || ''  , :placeholder => "Enter service name ...", :class => 'search_box' %>
+  						 			  <%= submit_tag("Search", :class => 'search_button_submit') %>
+                    <% end -%>
+					 			  </td>
+								  <td style="padding-left:5px;">
+                    <%=link_to 'Home', {:controller=>'admin', :action=>'index'}%>
+                    |
+                    <%=link_to 'Logout', {:controller=>'login',:action=>'logout'}%> 
+        					</td> 
+				       	</table>
+				       	<%elsif session[:role] == "Support Manager"%>
+            		 <%=link_to 'Home', {:controller=>'admin', :action=>'index'}%>
+				            |                     
+                <%=link_to 'Logout',{:controller => 'login',:action => 'logout'}%>
+
+              <%elsif session[:role] == "Administrator" %>                     
+                <%=link_to 'Logout', {:controller=>'login',:action=>'logout'}%>
+                 <%elsif session[:role] == "user" %>                     
+                <%=link_to 'Logout', {:controller=>'user',:action=>'logout'}%>
+              
+                 <%elsif session[:role] == "facebook" %>                     
+                <div id="user_nav">
+  <% if current_user %>
+    <%= link_to "Sign out", signout_path, id: "sign_out" %>
+  <% else %>
+    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+  <% end %>
+</div>
+ <%elsif session[:role] == "twitter" %>                     
+                <div id="user_nav">
+  <% if current_user %>
+    <%= link_to "Sign out", signout_path, id: "sign_out" %>
+  <% else %>
+    <%= link_to "Sign in with Facebook", "/auth/twitter", id: "sign_in" %>
+  <% end %>
+</div>
+              <%else%>
+              <% end %>
+              <%if (session[:city])%>
+	              <script type="text/javascript">
+							    window.status=document.getElementById('login_role').value
+							  </script>
+					    <%end%>
+            </div>
+          </div>
+	        <% if session[:requested_for] != '' and session[:requested_for]%>
+          <%sch_id=User.find(session[:requested_for]).scheme.id%>
+          <%scheme_pop=SchemeService.find(:all,:conditions=>['scheme_id=?',sch_id]).collect(&:service_id)%>
+          <%unless (pop_serv&scheme_pop).blank?%>
+	          <div class="list_service">
+	           	<%= link_to 'POPULAR SERVICES', {:controller=>'admin', :action=>'processServices'},:class => "test" %>
+						</div>
+	        <% end %>
+	        <% end %>
+          <div id="side"  style="float:left;">
+            <% if session[:role] == "Administrator"||session[:role] == "Country Analyst" ||session[:role]=="City Analyst"|| session[:role]=="Others"%>
+              <%#sp=SetPromotion.find(:all,:conditions=>['role_id=? and city_id=?',emp.role_id,emp.city_id]).collect(&:promotion_id).uniq%>
+              <%= render :partial=>"/admin/adminForm" %>
+            <% end %>
+           <% if session[:role] == "user" ||session[:role] == "facebook" ||session[:role] == "twitter"%>
+              <%= render :partial=>"/admin/user" %>
+           <%end%>
+          </div>
+          <% if session[:requested_for] != '' and session[:requested_for] and session[:login_id]!=1465%>
+            <%= render :partial => "layouts/popular" %>
+            <div class="list_service" STYLE="margin-top:10px;">
+              <%= link_to 'LIST OF SERVICES', {:controller=>'admin', :action=>'processServices'},:class => "test" %>
+            </div>
+            <%@user_details=User.find(session[:requested_for])%>
+            <p class="service_list_second">Handling the request of &nbsp; <%= @user_details.first_name %>,&nbsp; E-mail Id &nbsp; <%= @user_details.emailid %>&nbsp;&nbsp;
+            </p>
+	  <%else%>
+	   
+          <% end %>
+          <div id="main">
+            <% if flash[:notice] %>
+              <p align="center" width="500px" id="notice"><%= flash[:notice] %></p>
+            <% end %>
+            <center><%= yield %></center>
+          </div>
+        </div>    
+      </div> 
+    </div>
+  </body>
+   
+</html>

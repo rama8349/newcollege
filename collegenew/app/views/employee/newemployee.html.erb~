@@ -1,0 +1,16 @@
+<%=stylesheet_link_tag 'showpage'%>
+<%=stylesheet_link_tag 'easy'%>
+<%= javascript_include_tag "prototype" %>
+<%#= javascript_include_tag "scriptaculous", "defaults" %>
+<div class="parent">
+<h2>Employee</h2>
+
+<%=form_tag :action => 'createemployee'%>
+<%=error_messages_for 'employee' %>
+<%=render :partial=>'employeeform'%>
+
+<p>
+<%= submit_tag "Create" %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<%= link_to 'Back',:action=>'showemployee'%>
+</p>
+</form>
+</div>

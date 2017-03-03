@@ -1,0 +1,71 @@
+
+
+
+
+
+
+<%if (session[:role]=="Admin" || session[:role]=="Manager" || session[:role]=="Employee" )%>
+  <table>
+  <tr>
+    <%if session[:role]=="Admin"||session[:role]=="Country Analyst"||session[:role]=="City Analyst"|| session[:role]=="Others"%>
+    <td style="font-size:15px;">Administrator</td>
+    <%else%>
+    <td style="font-size:15px;"><%=Employee.find(session[:login_id]).first_name%>&nbsp;<%=Employee.find(session[:login_id]).last_name%></td>
+    <%end%>
+  </tr>
+  </table>
+<%unless session[:role]=="Admin"%>
+  <table>
+  <tr>
+    <%@emp=Employee.find(session[:login_id])%>
+    <%@user=User.find_by_emailid(@emp.email_id)%>
+    <%@customer=Opencart::Customer.find_by_email(@emp.email_id)%>
+    <td colspan="2">
+    <%unless @customer.blank?%>
+      <p style="color:#740011; font-size: 13.5px; font-style:italic; font-weight: bold; font-family:Arial Black;" align="center">Total Reward Points You Have <%=Opencart::CustomerReward.sum(:points,:conditions=>['customer_id=?',@customer.customer_id])%> !!! &nbsp;&nbsp; <a href="/user_login/emp_cart_login" target="_blank">Click Here</a> To Redeem Your Points</p>
+    <%end%>
+      <%if session[:role]=="Manager"%>
+      <%u=User.find_by_emailid(@emp.email_id)%>
+      <p style="color:#740011; font-size: 13.5px; font-style:italic; font-weight: bold; font-family:Arial Black;">Total Reward Points You Have in your bucket to allocate to your reportees is <%=u.bucket_points rescue 0%>. <a href="/points/add_points">Click Here</a> To Add Points.
+      <%end%>
+    </td>
+  </tr>
+  </table>
+<%end%>
+<img src="http://support.superseva.com/images/Reward.jpg"/>
+<%elsif session[:role]=="facebook" || session[:role]=="twitter"%>
+  <table style="font-size:15px;">
+  <tr>
+    <td>Name:</td> 
+    <td><%= current_user.first_name %></td>
+  </tr>
+<tr>
+    <td>Login From:</td> 
+    <td><%= current_user.type_of_login %></td>
+  </tr>
+<%else%>
+<table style="font-size:15px;">
+  <tr>
+    <td>Name:</td> 
+<%#raise session.inspect%>
+    <td><%=session[:login_name]%></td>
+  </tr>
+  <%unless session[:role]=="Client"%>
+    <tr>
+      <td>Role:</td>
+      <td><%=session[:role]%></td>
+    </tr>
+  <%end%>
+  <%if session[:role] == "Help Desk"%>
+    <tr>
+      <% @scheme = Scheme.find(:first,:conditions=>['employee_id=? and status=?',session[:login_id],"Active"]) %>
+      <% if @scheme %>
+        <td>Scheme:</td>
+        <td><%= @scheme.scheme_name %></td>
+      <%end%>
+    </tr>
+   
+  <%else%>
+  <%end%>
+</table>
+<%end%>

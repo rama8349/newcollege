@@ -1,0 +1,31 @@
+<%=stylesheet_link_tag 'showpage'%>
+<%=stylesheet_link_tag 'easy'%>
+<%= javascript_include_tag "prototype" %>
+<%= javascript_include_tag "scriptaculous", "defaults" %>
+<div class="parent">
+
+<% form_tag :action =>'updateemployee', :id =>@employee do %>
+<%= error_messages_for :employee %>
+  <!--[form:document]-->
+   <h2>Edit Employee</h2>
+<%=render :partial=>'employeeform'%>
+<table class="submitforms">
+<tr>
+ <td>Status</td>  
+  <td><%=radio_button :employee, :status, "Active"%>:Active </td>
+  <td> <%=radio_button :employee, :status, "In-Active"%>:In-Active</td>
+
+</tr>
+</table>
+<!--[endform:document]-->
+
+<p align="center">
+<!--  <%#= submit_tag 'Edit' %>&nbsp;&nbsp;&nbsp;<%#= link_to 'Back',:action=>'showemployee'%>-->
+  <%= submit_tag 'Edit' %>&nbsp;&nbsp;&nbsp;<a href="#" onClick='history.back();return false;'>Back</a>
+  </p> 
+  
+<% end %>
+</div>
+
+
+  

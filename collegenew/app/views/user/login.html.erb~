@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<style>
+  		h {
+  			color: #64EEE1;
+  		}
+  	</style>
+<h>Welcome to user login</h>
+    <%= stylesheet_link_tag 'showpage' %>
+
+    <div id="fb-root"></div>
+    
+    <style type="text/css">
+      .common_left_block {clear:both;float:left;overflow:hidden;width:100%;margin-bottom:3px;}
+      .section_title {color:white;font-weight:bold;border-bottom:1px solid #3B5998;float:left;margin:0;padding:0;width:100%;background:#3B5998;}
+      .innerbox {width:100%;padding-bottom:10px;float:left;margin:0;}
+    </style>
+    <title>College:: ::</title>
+  </head>   
+  <body>
+    <div class="super_parent">
+      <div class="parent">
+        <div class="logo" style="float:left;clear:both"><img src="/images/logo.png" height="100" style="padding:10px;margin-top:20px;" alt="SupersevaSupport"></div>
+        <div class="loginContent">
+          <form id="form" name="form" action="/user/authorize" method="post">
+            <% if flash[:message] %>
+              <%= flash[:message] %>
+            <% end %>
+            <table border="0">
+              <tr>
+                <td style="font-family:bold,sans-serif,arial;font-size:12.8px;">User Name:</td>                       
+                <td><%= text_field(:login, :email,:class=>'ltext',:autofocus=>true )%></td>
+              </tr>
+              <tr><td></td><td></td></tr>
+              <tr>
+                <td style="font-family:bold,sans-serif,arial;font-size:12.8px;">Password:</td>
+                <td><%= password_field(:login, :pw,:class=>'ltext') %></td>
+              </tr>
+              <tr style="text-align:right;">
+                <td colspan="2">
+                  <input type="submit" value="" class="backgroundImageSubmit"/>
+                  <input type="reset" value="" class="backgroundImageReset"/> &nbsp;&nbsp;&nbsp;
+                </td>
+              </tr>
+<tr>
+ <!--<td colspan="2"><%= link_to 'New employee',:controller=>'employee',:action=>'newemployee'%>&nbsp;&nbsp;&nbsp;-->
+<td><%= link_to 'Sign Up',:controller=>'user',:action=>'new_user'%></td>
+<td><%= link_to 'Back',:controller=>'login',:action=>'login1'%></td>
+</tr>
+<tr>
+<div id="user-widget">
+ 
+   <td> <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %></td>
+</div>
+</tr>
+<tr>
+<td> <%= link_to "Sign in with Facebook", "/auth/twitter", id: "sign_in" %></td>
+</tr>
+<tr>
+<td align="right"><a href="https://www.gmail.com" onclick="return letter(this, 'notes')">Login with Gmail</a></td>
+   </tr>             
+
+
+            </table>
+          </form>
+        </div>
+       
+  </body>
+</html>
+<script>
+function checkLoginState() {
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+}
+
+FB.login(function(response){
+  // Handle the response object, like in statusChangeCallback() in our demo
+  // code.
+});
+FB.login(function(response) {
+  // handle the response
+}, {scope: 'public_profile,email'});
+
+FB.login(function(response) {
+  if (response.status === 'connected') {
+    // Logged into your app and Facebook.
+  } else if (response.status === 'not_authorized') {
+    // The person is logged into Facebook, but not your app.
+  } else {
+    // The person is not logged into Facebook, so we're not sure if
+    // they are logged into this app or not.
+  }
+});
+
+
+FB.logout(function(response) {
+   // Person is now logged out
+});
+function letter(mylink, windowname)
+{
+if (! window.focus)return true;
+    var href;
+    if (typeof(mylink) == 'string') href=mylink;
+    else href=mylink.href; 
+
+
+
+
+    window.open(href, windowname, 'width=600,height=300,scrollbars=yes'); 
+    return false; 
+
+
+
+}
+</script>
+

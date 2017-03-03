@@ -1,0 +1,17 @@
+<%=stylesheet_link_tag 'showpage'%>
+
+<h2>New Regional</h2>
+
+<%=error_messages_for :regional%>
+<%=form_tag :action => 'createregion'%>
+<table class="submitforms">
+<tr>
+<td>Regional Name<font color="red">*</font></td>
+<td><%=text_field 'regional','region_name', :class=>'ltext'%></td>
+</tr>
+
+
+<tr><td></td><td style="padding-left:40px;padding-top:6px"><%=submit_tag 'Submit'%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<%= link_to 'Back',:action=>'showregion'%> </td></tr>
+
+</table>
